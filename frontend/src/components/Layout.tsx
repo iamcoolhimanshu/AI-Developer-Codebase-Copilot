@@ -23,21 +23,21 @@ export default function Layout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
-  const links = [
+const links = [
     { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className={iconCls} /> },
-    { to: '/chat', label: 'AI Copilot', icon: <MessageSquare className={iconCls} /> },
-    { to: '/search', label: 'Search', icon: <Search className={iconCls} /> },
-    { to: '/bug', label: 'Debug', icon: <Bug className={iconCls} /> },
-    { to: '/review', label: 'Review', icon: <ShieldCheck className={iconCls} /> },
-    { to: '/tests', label: 'Tests', icon: <FlaskConical className={iconCls} /> },
-    { to: '/docs', label: 'Docs', icon: <FileText className={iconCls} /> },
-    { to: '/patches', label: 'Patches', icon: <Hammer className={iconCls} /> },
+    { to: '/projects/1/chat', label: 'AI Copilot', icon: <MessageSquare className={iconCls} /> },
+    { to: '/projects/1/search', label: 'Search', icon: <Search className={iconCls} /> },
+    { to: '/projects/1/bug', label: 'Debug', icon: <Bug className={iconCls} /> },
+    { to: '/projects/1/review', label: 'Review', icon: <ShieldCheck className={iconCls} /> },
+    { to: '/projects/1/tests', label: 'Tests', icon: <FlaskConical className={iconCls} /> },
+    { to: '/projects/1/docs', label: 'Docs', icon: <FileText className={iconCls} /> },
+    { to: '/projects/1/patches', label: 'Patches', icon: <Hammer className={iconCls} /> },
   ]
-
+  
   const explorer = [
-    { to: '/code', label: 'Code Explorer', icon: <FileCode2 className={iconCls} /> },
-    { to: '/architecture', label: 'Architecture', icon: <GitBranch className={iconCls} /> },
-    { to: '/git', label: 'Git History', icon: <GitBranch className={iconCls} /> },
+    { to: '/projects/1/code', label: 'Code Explorer', icon: <FileCode2 className={iconCls} /> },
+    { to: '/projects/1/architecture', label: 'Architecture', icon: <GitBranch className={iconCls} /> },
+    { to: '/projects/1/git', label: 'Git History', icon: <GitBranch className={iconCls} /> },
   ]
 
   return (
@@ -85,7 +85,7 @@ export default function Layout() {
           ))}
           <div className="mb-1 mt-4 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-600">System</div>
           <NavLink
-            to="/agent"
+            to="/projects/1/agent"
             className={({ isActive }) =>
               `flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors ${
                 isActive ? 'bg-sky-600/15 text-sky-300' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'

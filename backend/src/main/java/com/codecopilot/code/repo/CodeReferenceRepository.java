@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface CodeReferenceRepository extends JpaRepository<CodeReference, Long> {
 
-    List<CodeReference> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
+	List<CodeReference> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
 
-    List<CodeReference> findByProjectIdAndTargetName(Long projectId, String targetName);
+	List<CodeReference> findByProjectIdAndTargetName(Long projectId, String targetName);
 
-    List<CodeReference> findByProjectIdAndTargetNameAndTargetClassFq(
-            Long projectId, String targetName, String targetClassFq);
+	List<CodeReference> findByProjectIdAndTargetNameAndTargetClassFq(Long projectId, String targetName,
+			String targetClassFq);
 
-    List<CodeReference> findByProjectIdAndRepositoryIdAndTargetName(
-            Long projectId, Long repositoryId, String targetName);
+	List<CodeReference> findByProjectIdAndRepositoryIdAndTargetName(Long projectId, Long repositoryId,
+			String targetName);
 
-    List<CodeReference> findByProjectIdAndSourceClassFq(Long projectId, String sourceClassFq);
+	List<CodeReference> findByProjectIdAndSourceClassFq(Long projectId, String sourceClassFq);
 
-    void deleteByRepositoryId(Long repositoryId);
+	void deleteByRepositoryId(Long repositoryId);
 
-    void deleteByRepositoryIdAndFileId(Long repositoryId, Long fileId);
+	void deleteByRepositoryIdAndFileId(Long repositoryId, Long fileId);
 }

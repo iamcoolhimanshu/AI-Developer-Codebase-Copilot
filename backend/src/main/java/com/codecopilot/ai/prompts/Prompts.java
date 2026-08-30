@@ -1,9 +1,5 @@
 package com.codecopilot.ai.prompts;
 
-/**
- * Central prompt template catalog. All system prompts live here so controllers
- * and services never inline large AI instructions.
- */
 public final class Prompts {
 
     private Prompts() {

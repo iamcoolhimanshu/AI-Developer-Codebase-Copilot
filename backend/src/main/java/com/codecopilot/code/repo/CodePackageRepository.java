@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface CodePackageRepository extends JpaRepository<CodePackage, Long> {
 
-    List<CodePackage> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
+	List<CodePackage> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
 
-    Optional<CodePackage> findByProjectIdAndRepositoryIdAndName(Long projectId, Long repositoryId, String name);
+	Optional<CodePackage> findByProjectIdAndRepositoryIdAndName(Long projectId, Long repositoryId, String name);
 
-    void deleteByRepositoryId(Long repositoryId);
+	void deleteByRepositoryId(Long repositoryId);
 }

@@ -19,36 +19,36 @@ import java.util.List;
 @RequestMapping("/api/projects/{projectId}/patches")
 public class PatchController {
 
-    private final PatchService patchService;
+	private final PatchService patchService;
 
-    public PatchController(PatchService patchService) {
-        this.patchService = patchService;
-    }
+	public PatchController(PatchService patchService) {
+		this.patchService = patchService;
+	}
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<GeneratedPatch>> generate(@PathVariable Long projectId,
-                                                                @Valid @RequestBody PatchRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.ok("Patch generated - review before applying", patchService.generate(projectId, request)));
-    }
+	@PostMapping
+	public ResponseEntity<ApiResponse<GeneratedPatch>> generate(@PathVariable Long projectId,
+			@Valid @RequestBody PatchRequest request) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(
+				ApiResponse.ok("Patch generated - review before applying", patchService.generate(projectId, request)));
+	}
 
-    @GetMapping
-    public ApiResponse<List<GeneratedPatch>> list(@PathVariable Long projectId) {
-        return ApiResponse.ok(patchService.list(projectId));
-    }
+	@GetMapping
+	public ApiResponse<List<GeneratedPatch>> list(@PathVariable Long projectId) {
+		return ApiResponse.ok(patchService.list(projectId));
+	}
 
-    @PostMapping("/{patchId}/approve")
-    public ApiResponse<GeneratedPatch> approve(@PathVariable Long projectId, @PathVariable Long patchId) {
-        return ApiResponse.ok(patchService.approve(projectId, patchId));
-    }
+	@PostMapping("/{patchId}/approve")
+	public ApiResponse<GeneratedPatch> approve(@PathVariable Long projectId, @PathVariable Long patchId) {
+		return ApiResponse.ok(patchService.approve(projectId, patchId));
+	}
 
-    @PostMapping("/{patchId}/apply")
-    public ApiResponse<GeneratedPatch> apply(@PathVariable Long projectId, @PathVariable Long patchId) {
-        return ApiResponse.ok("Patch applied", patchService.apply(projectId, patchId));
-    }
+	@PostMapping("/{patchId}/apply")
+	public ApiResponse<GeneratedPatch> apply(@PathVariable Long projectId, @PathVariable Long patchId) {
+		return ApiResponse.ok("Patch applied", patchService.apply(projectId, patchId));
+	}
 
-    @PostMapping("/{patchId}/reject")
-    public ApiResponse<GeneratedPatch> reject(@PathVariable Long projectId, @PathVariable Long patchId) {
-        return ApiResponse.ok(patchService.reject(projectId, patchId));
-    }
+	@PostMapping("/{patchId}/reject")
+	public ApiResponse<GeneratedPatch> reject(@PathVariable Long projectId, @PathVariable Long patchId) {
+		return ApiResponse.ok(patchService.reject(projectId, patchId));
+	}
 }

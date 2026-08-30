@@ -15,14 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Read-only code intelligence tools exposed to the AI.
- *
- * Safety: every tool resolves the project-scoped context from
- * {@link CurrentProjectContext} and verifies view access server-side. These are
- * all read-only tools; mutating operations live in the patch module and
- * require explicit developer approval.
- */
+
 @Service
 public class CodeIntelligenceTools {
 
@@ -176,9 +169,6 @@ public class CodeIntelligenceTools {
         audit("getGitHistory", repositoryId);
         Long projectId = CurrentProjectContext.projectId();
         Long rid = repositoryId != null && !repositoryId.isBlank() ? Long.parseLong(repositoryId) : firstRepoId(projectId);
-        if (rid == null) {
-            return "No repository available.";
-        }
         try {
             var commits = gitService.commits(projectId, rid, null, 10);
             return commits.stream().map(c -> c.shortId() + " " + c.author() + " " + c.message()).collect(Collectors.joining("\n"));

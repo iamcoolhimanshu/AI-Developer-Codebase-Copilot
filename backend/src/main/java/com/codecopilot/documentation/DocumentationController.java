@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/projects/{projectId}")
 public class DocumentationController {
 
-    private final DocumentationService documentationService;
+	private final DocumentationService documentationService;
 
-    public DocumentationController(DocumentationService documentationService) {
-        this.documentationService = documentationService;
-    }
+	public DocumentationController(DocumentationService documentationService) {
+		this.documentationService = documentationService;
+	}
 
-    @PostMapping("/documentation")
-    public ApiResponse<DocumentationService.GeneratedDocument> generate(@PathVariable Long projectId,
-                                                                        @RequestParam Long repositoryId,
-                                                                        @RequestParam(defaultValue = "README") String type) {
-        return ApiResponse.ok(documentationService.generate(projectId, repositoryId, type));
-    }
+	@PostMapping("/documentation")
+	public ApiResponse<DocumentationService.GeneratedDocument> generate(@PathVariable Long projectId,
+			@RequestParam Long repositoryId, @RequestParam(defaultValue = "README") String type) {
+		return ApiResponse.ok(documentationService.generate(projectId, repositoryId, type));
+	}
 }

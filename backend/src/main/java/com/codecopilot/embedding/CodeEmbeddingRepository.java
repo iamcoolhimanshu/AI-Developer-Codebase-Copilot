@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface CodeEmbeddingRepository extends JpaRepository<CodeEmbedding, Long> {
 
-    List<CodeEmbedding> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
+	List<CodeEmbedding> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
 
-    List<CodeEmbedding> findByProjectIdAndFileIdIn(Long projectId, List<Long> fileIds);
+	List<CodeEmbedding> findByProjectIdAndFileIdIn(Long projectId, List<Long> fileIds);
 
-    void deleteByRepositoryId(Long repositoryId);
+	void deleteByRepositoryId(Long repositoryId);
 
-    void deleteByChunkId(Long chunkId);
+	void deleteByChunkId(Long chunkId);
 
-    void deleteByFileId(Long fileId);
+	void deleteByFileId(Long fileId);
 }

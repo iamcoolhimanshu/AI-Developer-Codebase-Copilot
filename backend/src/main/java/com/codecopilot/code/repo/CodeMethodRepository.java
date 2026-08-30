@@ -8,26 +8,26 @@ import java.util.Optional;
 
 public interface CodeMethodRepository extends JpaRepository<CodeMethod, Long> {
 
-    List<CodeMethod> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
+	List<CodeMethod> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
 
-    List<CodeMethod> findByProjectIdAndRepositoryIdAndClassId(Long projectId, Long repositoryId, Long classId);
+	List<CodeMethod> findByProjectIdAndRepositoryIdAndClassId(Long projectId, Long repositoryId, Long classId);
 
-    Optional<CodeMethod> findByProjectIdAndRepositoryIdAndClassIdAndName(
-            Long projectId, Long repositoryId, Long classId, String name);
+	Optional<CodeMethod> findByProjectIdAndRepositoryIdAndClassIdAndName(Long projectId, Long repositoryId,
+			Long classId, String name);
 
-    long countByProjectId(Long projectId);
+	long countByProjectId(Long projectId);
 
-    long countByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
+	long countByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
 
-    long countByProjectIdAndHttpPathNotNull(Long projectId);
+	long countByProjectIdAndHttpPathNotNull(Long projectId);
 
-    List<CodeMethod> findByProjectIdAndHttpPathNotNull(Long projectId);
+	List<CodeMethod> findByProjectIdAndHttpPathNotNull(Long projectId);
 
-    List<CodeMethod> findByProjectIdAndRepositoryIdAndHttpPathNotNull(Long projectId, Long repositoryId);
+	List<CodeMethod> findByProjectIdAndRepositoryIdAndHttpPathNotNull(Long projectId, Long repositoryId);
 
-    List<CodeMethod> findByProjectIdAndHttpPathContaining(Long projectId, String pathFragment);
+	List<CodeMethod> findByProjectIdAndHttpPathContaining(Long projectId, String pathFragment);
 
-    void deleteByRepositoryId(Long repositoryId);
+	void deleteByRepositoryId(Long repositoryId);
 
-    void deleteByRepositoryIdAndFileId(Long repositoryId, Long fileId);
+	void deleteByRepositoryIdAndFileId(Long repositoryId, Long fileId);
 }

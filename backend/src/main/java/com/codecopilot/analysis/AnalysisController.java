@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/projects/{projectId}")
 public class AnalysisController {
 
-    private final BugInvestigatorService investigator;
+	private final BugInvestigatorService investigator;
 
-    public AnalysisController(BugInvestigatorService investigator) {
-        this.investigator = investigator;
-    }
+	public AnalysisController(BugInvestigatorService investigator) {
+		this.investigator = investigator;
+	}
 
-    @PostMapping("/bug-analysis")
-    public ApiResponse<BugAnalysisResponse> investigate(@PathVariable Long projectId,
-                                                        @Valid @RequestBody BugAnalysisRequest request) {
-        return ApiResponse.ok(investigator.investigate(projectId, request));
-    }
+	@PostMapping("/bug-analysis")
+	public ApiResponse<BugAnalysisResponse> investigate(@PathVariable Long projectId,
+			@Valid @RequestBody BugAnalysisRequest request) {
+		return ApiResponse.ok(investigator.investigate(projectId, request));
+	}
 }

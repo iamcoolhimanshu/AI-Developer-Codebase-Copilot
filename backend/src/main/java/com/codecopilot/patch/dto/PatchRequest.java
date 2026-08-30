@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class PatchRequest {
 
-    @NotBlank
-    private String instruction;
+	@NotBlank
+	private String instruction;
 
-    @NotNull
-    private Long repositoryId;
+	@NotNull
+	private Long repositoryId;
 }

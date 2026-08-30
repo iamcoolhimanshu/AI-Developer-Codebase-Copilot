@@ -7,17 +7,17 @@ import java.util.List;
 
 public interface CodeDependencyRepository extends JpaRepository<CodeDependency, Long> {
 
-    List<CodeDependency> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
+	List<CodeDependency> findByProjectIdAndRepositoryId(Long projectId, Long repositoryId);
 
-    List<CodeDependency> findByProjectIdAndSourceClassFq(Long projectId, String sourceClassFq);
+	List<CodeDependency> findByProjectIdAndSourceClassFq(Long projectId, String sourceClassFq);
 
-    List<CodeDependency> findByProjectIdAndTargetClassFq(Long projectId, String targetClassFq);
+	List<CodeDependency> findByProjectIdAndTargetClassFq(Long projectId, String targetClassFq);
 
-    List<CodeDependency> findByProjectId(Long projectId);
+	List<CodeDependency> findByProjectId(Long projectId);
 
-    long countByProjectId(Long projectId);
+	long countByProjectId(Long projectId);
 
-    void deleteByRepositoryId(Long repositoryId);
+	void deleteByRepositoryId(Long repositoryId);
 
-    void deleteByRepositoryIdAndFileId(Long repositoryId, Long fileId);
+	void deleteByRepositoryIdAndFileId(Long repositoryId, Long fileId);
 }

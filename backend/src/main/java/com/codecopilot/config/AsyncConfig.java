@@ -10,15 +10,15 @@ import java.util.concurrent.Executor;
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
 
-    @Override
-    @Bean(name = "taskExecutor")
-    public Executor getAsyncExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(2);
-        executor.setMaxPoolSize(4);
-        executor.setQueueCapacity(50);
-        executor.setThreadNamePrefix("copilot-async-");
-        executor.initialize();
-        return executor;
-    }
+	@Override
+	@Bean(name = "taskExecutor")
+	public Executor getAsyncExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(2);
+		executor.setMaxPoolSize(4);
+		executor.setQueueCapacity(50);
+		executor.setThreadNamePrefix("copilot-async-");
+		executor.initialize();
+		return executor;
+	}
 }

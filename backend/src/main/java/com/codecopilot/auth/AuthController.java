@@ -20,29 +20,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthService authService;
+	private final AuthService authService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
+	public AuthController(AuthService authService) {
+		this.authService = authService;
+	}
 
-    @PostMapping("/register")
-    public ResponseEntity<ApiResponse<AuthResponse>> register(@Valid @RequestBody RegisterRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.ok("Registered", authService.register(request)));
-    }
+	@PostMapping("/register")
+	public ResponseEntity<ApiResponse<AuthResponse>> register(@Valid @RequestBody RegisterRequest request) {
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(ApiResponse.ok("Registered", authService.register(request)));
+	}
 
-    @PostMapping("/login")
-    public ApiResponse<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-        return ApiResponse.ok(authService.login(request));
-    }
+	@PostMapping("/login")
+	public ApiResponse<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+		return ApiResponse.ok(authService.login(request));
+	}
 
-    @PostMapping("/refresh")
-    public ApiResponse<AuthResponse> refresh(@Valid @RequestBody RefreshRequest request) {
-        return ApiResponse.ok(authService.refresh(request));
-    }
+	@PostMapping("/refresh")
+	public ApiResponse<AuthResponse> refresh(@Valid @RequestBody RefreshRequest request) {
+		return ApiResponse.ok(authService.refresh(request));
+	}
 
-    @GetMapping("/me")
-    public ApiResponse<CurrentUserDto> me() {
-        return ApiResponse.ok(authService.currentUser(SecurityUtils.currentUserId()));
-    }
+	@GetMapping("/me")
+	public ApiResponse<CurrentUserDto> me() {
+		return ApiResponse.ok(authService.currentUser(SecurityUtils.currentUserId()));
+	}
 }
