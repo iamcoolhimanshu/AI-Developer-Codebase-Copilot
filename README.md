@@ -2,7 +2,7 @@
 
 A self-hosted AI codebase assistant. Connect a Git repository (GitHub clone or ZIP upload), let the backend index it (files, classes, methods, dependencies, semantic chunks), then explore it and run AI workflows: project Q&A with RAG sources, code explanation, architecture diagrams, bug hunting, code review, test generation, docs generation, and AI-assisted patch creation with a safe `git apply` approve/apply/reject flow.
 
-- **Backend**: Java 17, Spring Boot 3.5, Spring AI 1.1 + Grok (xAI, OpenAI-compatible API), JGit, JavaParser, JPA/H2 or MySQL
+- **Backend**: Java 17, Spring Boot 3.5, Spring AI 1.1 (OpenAI-compatible – works with OpenAI **or** Grok/xAI), JGit, JavaParser, JPA/H2 or MySQL
 - **Frontend**: React 19 + Vite 8, TypeScript, Tailwind CSS 4, Monaco editor, SSE streaming chat
 - Extras: JWT auth (access + refresh), role-based access (USER / DEVELOPER / ADMIN), audit log, in-memory observability metrics
 
@@ -53,23 +53,40 @@ Open http://localhost:1234. Vite proxies `/api` to `http://localhost:8080` (over
 3. Start indexing (`POST /api/repositories/{repoId}/index?projectId=...`). On the sample spring-petclinic repo this finishes in seconds (110 files, ~3000 chunks).
 4. Explore: code, architecture, API endpoints, git history, search — then use the AI tools.
 
-## AI configuration (Grok / xAI)
+## AI configuration (OpenAI or Grok / xAI)
 
-Set environment variables (or copy `.env.example`):
+The backend uses Spring AI's OpenAI starter, which is OpenAI-compatible and works with **both** providers. Set **one** provider (or copy `.env.example`):
 
+**OpenAI** (recommended):
 ```bash
-XAI_API_KEY=your_xai_key        # optional at runtime; REQUIRED for live AI answers
-XAI_MODEL=grok-4                # default model
+OPENAI_API_KEY=sk-proj-...              # REQUIRED for live AI answers
+OPENAI_MODEL=gpt-4o-mini                # e.g. gpt-4o-mini, gpt-4o, gpt-4o-2024-08-06
+OPENAI_BASE_URL=https://api.openai.com/v1
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+```
+
+**Grok / xAI:**
+```bash
+XAI_API_KEY=xai-...                     # REQUIRED for live AI answers
+XAI_MODEL=grok-4
+XAI_BASE_URL=https://api.x.ai/v1
+XAI_EMBEDDING_MODEL=text-embedding-3-small
+```
+
+Generic fallbacks also work: `AI_API_KEY`, `AI_MODEL`, `AI_BASE_URL`, `AI_EMBEDDING_MODEL`. Priority: `OPENAI_*` > `XAI_*` > `AI_*`.
+
+Other env vars:
+```bash
 GITHUB_TOKEN=                   # optional, for private GitHub repos
 JWT_SECRET=change-me            # production: use a long random string
 ```
 
-Without `XAI_API_KEY` the app still runs: chat/agent/review/docs/patch actions fail fast with a clear "AI is not configured" message, chat streams the message over SSE, and indexing uses stub (hash) embeddings so search and architecture still work.
+Without any AI key the app still runs: chat/agent/review/docs/patch actions fail fast with a clear "AI is not configured" message, chat streams the message over SSE, and indexing uses stub (hash) embeddings so search and architecture still work.
 
 ## Docker deployment
 
 ```bash
-cp .env.example .env   # set XAI_API_KEY etc.
+cp .env.example .env   # set OPENAI_API_KEY or XAI_API_KEY etc.
 docker compose up -d --build
 ```
 

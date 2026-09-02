@@ -35,7 +35,9 @@ public class GrokAiService implements AiService {
     public String chat(String systemPrompt, String userPrompt, ChatClient client) {
         if (!configured) {
             throw new BadRequestException(
-                    "AI is not configured. Set XAI_API_KEY (and XAI_MODEL) in the environment first.");
+                    "AI is not configured. Set OPENAI_API_KEY (or XAI_API_KEY) and OPENAI_MODEL (or XAI_MODEL) in the environment first. "
+                            + "For OpenAI: OPENAI_API_KEY=sk-... OPENAI_MODEL=gpt-4o-mini OPENAI_BASE_URL=https://api.openai.com/v1. "
+                            + "For Grok: XAI_API_KEY=xai-... XAI_MODEL=grok-4 XAI_BASE_URL=https://api.x.ai/v1.");
         }
         ChatClient chatClient = client != null ? client : chatClientBuilder.build();
         return chatClient.prompt()
@@ -48,7 +50,8 @@ public class GrokAiService implements AiService {
     @Override
     public Flux<String> stream(String systemPrompt, String userPrompt) {
         if (!configured) {
-            return Flux.just("AI is not configured. Set XAI_API_KEY (and XAI_MODEL) in the environment first.");
+            return Flux.just(
+                    "AI is not configured. Set OPENAI_API_KEY (or XAI_API_KEY) and OPENAI_MODEL (or XAI_MODEL) in the environment first.");
         }
         return chatClientBuilder.build().prompt()
                 .system(systemPrompt)
